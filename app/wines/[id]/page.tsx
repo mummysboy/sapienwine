@@ -28,15 +28,15 @@ export default function WineDetailPage({ params }: { params: Promise<{ id: strin
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="grid md:grid-cols-2 gap-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
         {/* Image */}
-        <div className="relative h-[600px] bg-gray-200 rounded-lg overflow-hidden fade-in-up">
+        <div className="relative h-[500px] md:h-[600px] lg:h-[700px] bg-gray-200 rounded-xl overflow-hidden fade-in-up shadow-lg">
           <Image
             src={wine.image}
             alt={wine.name}
             fill
-            className="object-cover"
+            className="object-contain transition-transform duration-500 hover:scale-105"
           />
         </div>
 

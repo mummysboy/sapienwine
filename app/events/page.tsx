@@ -97,30 +97,30 @@ export default function EventsPage() {
       </div>
 
       {/* Event Types Grid */}
-      <div className="grid md:grid-cols-2 gap-8 mb-12">
+      <div className="grid md:grid-cols-2 gap-8 md:gap-10 mb-12">
         {eventTypes.map((event, index) => (
           <div
             key={event.id}
-            className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow stagger-item`}
+            className={`bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-300 stagger-item`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <div className="relative h-64">
+            <div className="relative h-64 overflow-hidden">
               <Image
                 src={event.image}
                 alt={event.name}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-2">
+            <div className="p-6 md:p-7">
+              <div className="flex items-center justify-between mb-3">
                 <h3 className="text-2xl font-bold">{event.name}</h3>
-                <span className="text-sm text-gray-500 capitalize bg-gray-100 px-3 py-1 rounded">
+                <span className="text-sm text-gray-500 capitalize bg-gray-100 px-3 py-1 rounded-md">
                   {event.type}
                 </span>
               </div>
-              <p className="text-gray-700 mb-4">{event.description}</p>
-              <div className="space-y-2 mb-6 text-sm text-gray-600">
+              <p className="text-gray-700 mb-5 leading-relaxed">{event.description}</p>
+              <div className="space-y-2.5 mb-6 text-sm text-gray-600">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   <span>{event.duration}</span>

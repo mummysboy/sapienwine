@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { wines } from '@/data/wines'
 import { WineCard } from '@/components/WineCard'
 import { WineModal } from '@/components/WineModal'
+import { ImageCarousel } from '@/components/ImageCarousel'
 import { Wine } from '@/context/CartContext'
 
 export default function Home() {
@@ -26,14 +27,31 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-[600px] flex items-center justify-center bg-gradient-to-r from-wine-900 to-wine-700 text-white">
-        <div className="absolute inset-0 bg-black opacity-30"></div>
+      <section className="relative h-[600px] flex items-center justify-center text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/333.jpg"
+            alt="Sapien Wine hero"
+            fill
+            className="object-cover object-[left_10%] md:object-center brightness-110 contrast-105 saturate-125"
+            style={{
+              filter: 'sepia(20%) saturate(130%) brightness(110%) contrast(105%) hue-rotate(-5deg)',
+            }}
+            priority
+          />
+        </div>
+        <div 
+          className="absolute inset-0 opacity-70"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%)',
+          }}
+        ></div>
         <div className="relative z-10 text-center px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in-up">Sapien Wine</h1>
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto fade-in-up-delay-1">
             Discover exceptional wines and unforgettable experiences
           </p>
-          <div className="flex gap-4 justify-center fade-in-up-delay-2">
+          <div className="flex flex-wrap gap-4 justify-center fade-in-up-delay-2">
             <Link
               href="/wines"
               className="bg-white text-wine-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
@@ -46,14 +64,100 @@ export default function Home() {
             >
               Book Events
             </Link>
+            <Link
+              href="/wine-club"
+              className="bg-wine-600 text-white px-8 py-3 rounded-lg font-semibold border-2 border-wine-600"
+            >
+              Join our Wine Club
+            </Link>
           </div>
         </div>
       </section>
 
+      {/* Visit Our Winery Section */}
+      <section className="bg-gradient-to-b from-white to-gray-50 py-16 md:py-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 fade-in-up">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-wine-700 mb-4">
+              Visit Our Winery
+            </h2>
+            <div className="w-24 h-1 bg-wine-600 mx-auto mb-6 rounded-full"></div>
+            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed fade-in-up-delay-1">
+              Experience the heart of Santa Ynez Valley at our welcoming tasting room. 
+              Savor exceptional wines crafted with passion, surrounded by the warm atmosphere 
+              that makes every visit memorable.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Image Carousel */}
+      <section>
+        <ImageCarousel
+          images={[
+            '/HaleyBuschPhoto_LIB2019_Sponsor-0945.jpg',
+            '/IMG_0559.JPG',
+            '/IMG_0076.JPG',
+            '/IMG_1286.jpeg',
+          ]}
+          alt="Sapien Wine gallery"
+        />
+      </section>
+
+      {/* Our Story Section */}
+      <section className="bg-amber-50 py-16 md:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 fade-in-up">Our Story</h2>
+          <div className="prose prose-lg max-w-none text-gray-700 space-y-6 fade-in-up-delay-1 text-center">
+          <p className="text-lg leading-relaxed">
+            Since 2014, Trevor Bethke has been crafting boutique wines in the Santa Ynez Valley, committed to 
+            the finest quality from exceptional vineyards. His passion for winemaking has taken him around the 
+            world for harvests in Europe, Australia, New Zealand, and South Africa, where he learned the importance 
+            of hard work, cultural understanding, and a deep respect for nature's rhythms.
+          </p>
+          <p className="text-lg leading-relaxed">
+            Growing up in a family of land conservationists, engineers, and scientists, Trevor's connection to the 
+            land runs deep. He earned his Master's degree in Viticulture and Enology from U.C. Davis, following a 
+            double major in Biochemistry and Bioarchaeology. With this unique blend of global experience and 
+            scientific rigor, he founded Sapien Wine, sourced from carefully selected vineyards in Santa Ynez and 
+            the surrounding Santa Barbara County region.
+          </p>
+          <p className="text-lg leading-relaxed font-semibold text-wine-700">
+            Today, Sapien Wine represents the culmination of this journey—boutique wines that celebrate the inner 
+            humanity within us all.
+          </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Quote Section */}
+      <section className="relative h-[500px] md:h-[600px] flex items-center justify-center text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/BCP_8889.webp"
+            alt="Sapien Wine"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        <div 
+          className="absolute inset-0 opacity-60"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)',
+          }}
+        ></div>
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          <blockquote className="text-3xl md:text-5xl font-serif italic fade-in-up">
+            "The meaning of wine is to embrace humanity"
+          </blockquote>
+        </div>
+      </section>
+
       {/* Featured Wines */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-4xl font-bold text-center mb-12 fade-in-up">Featured Wines</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <h2 className="text-4xl font-bold text-center mb-12 md:mb-16 fade-in-up">Featured Wines</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {featuredWines.map((wine) => (
             <div key={wine.id} className="stagger-item">
               <WineCard wine={wine} onClick={() => handleWineClick(wine)} />

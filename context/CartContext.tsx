@@ -20,19 +20,32 @@ export interface CartItem {
   quantity: number
 }
 
+interface NotificationState {
+  wine: Wine | null
+  quantity: number
+  isVisible: boolean
+}
+
 interface CartContextType {
   cartItems: CartItem[]
+  notification: NotificationState
   addToCart: (wine: Wine, quantity?: number) => void
   removeFromCart: (wineId: string) => void
   updateQuantity: (wineId: string, quantity: number) => void
   clearCart: () => void
   getTotalPrice: () => number
+  hideNotification: () => void
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [notification, setNotification] = useState<NotificationState>({
+    wine: null,
+    quantity: 0,
+    isVisible: false,
+  })
 
   const addToCart = (wine: Wine, quantity: number = 1) => {
     setCartItems((prev) => {
@@ -46,6 +59,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { wine, quantity }]
     })
+
+    // Show notification
+    setNotification({
+      wine,
+      quantity,
+      isVisible: true,
+    })
+  }
+
+  const hideNotification = () => {
+    setNotification((prev) => ({ ...prev, isVisible: false }))
   }
 
   const removeFromCart = (wineId: string) => {
@@ -79,11 +103,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     <CartContext.Provider
       value={{
         cartItems,
+        notification,
         addToCart,
         removeFromCart,
         updateQuantity,
         clearCart,
         getTotalPrice,
+        hideNotification,
       }}
     >
       {children}

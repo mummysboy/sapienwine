@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center">
             <Image 
@@ -37,6 +37,12 @@ export default function Header() {
             <Link href="/events" className="text-gray-700 hover:text-wine-700 transition">
               Events
             </Link>
+            <Link 
+              href="/wine-club" 
+              className="bg-wine-600 text-white px-4 py-2 rounded-lg font-semibold"
+            >
+              Join Wine Club
+            </Link>
             <Link href="/cart" className="relative text-gray-700 hover:text-wine-700 transition">
               <ShoppingCart className="w-6 h-6" />
               {cartCount > 0 && (
@@ -58,37 +64,56 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 space-y-4">
-            <Link
-              href="/"
-              className="block text-gray-700 hover:text-wine-700 transition"
+          <>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
               onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/wines"
-              className="block text-gray-700 hover:text-wine-700 transition"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Wines
-            </Link>
-            <Link
-              href="/events"
-              className="block text-gray-700 hover:text-wine-700 transition"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Events
-            </Link>
-            <Link
-              href="/cart"
-              className="flex items-center space-x-2 text-gray-700 hover:text-wine-700 transition"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <ShoppingCart className="w-6 h-6" />
-              <span>Cart {cartCount > 0 && `(${cartCount})`}</span>
-            </Link>
-          </div>
+            />
+            {/* Menu */}
+            <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50 animate-slide-down">
+              <div className="px-4 py-6 space-y-1">
+                <Link
+                  href="/"
+                  className="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-wine-700 rounded-lg transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/wines"
+                  className="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-wine-700 rounded-lg transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Wines
+                </Link>
+                <Link
+                  href="/events"
+                  className="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-wine-700 rounded-lg transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Events
+                </Link>
+                <div className="pt-2 pb-1">
+                  <Link
+                    href="/wine-club"
+                    className="block bg-wine-600 text-white px-4 py-3 rounded-lg font-semibold text-center"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Join Wine Club
+                  </Link>
+                </div>
+                <Link
+                  href="/cart"
+                  className="flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-wine-700 rounded-lg transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <ShoppingCart className="w-6 h-6" />
+                  <span>Cart {cartCount > 0 && `(${cartCount})`}</span>
+                </Link>
+              </div>
+            </div>
+          </>
         )}
       </nav>
     </header>
