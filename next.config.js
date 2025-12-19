@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['images.unsplash.com', 'unsplash.com'],
+    formats: ['image/avif', 'image/webp'],
   },
 }
 

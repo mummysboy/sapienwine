@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface ImageCarouselProps {
@@ -60,13 +59,14 @@ export function ImageCarousel({ images, alt = 'Gallery image' }: ImageCarouselPr
                 index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
               }`}
             >
-              <Image
+              <img
                 src={image}
                 alt={`${alt} ${index + 1}`}
-                fill
-                className="object-cover w-full h-full"
-                priority={index === 0}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1280px"
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ 
+                  imageOrientation: 'from-image'
+                }}
+                loading={index === 0 ? 'eager' : 'lazy'}
               />
             </div>
           ))}
