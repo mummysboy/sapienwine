@@ -61,8 +61,10 @@ export function WineModal({ wine, isOpen, onClose }: WineModalProps) {
   }
 
   const handleAddToCart = () => {
-    addToCart(wine, quantity)
-    setQuantity(1)
+    if (wine) {
+      addToCart(wine, quantity)
+      setQuantity(1)
+    }
   }
 
   const handleBackdropClick = (e: React.MouseEvent) => {
